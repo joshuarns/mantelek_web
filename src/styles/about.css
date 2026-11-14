@@ -1,0 +1,38 @@
+.about {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 125vh;
+  overflow: hidden;
+}
+
+.about__bg-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.about__bg {
+  position: absolute;
+  inset: -10% 0;
+}
+
+.about__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(9 24 45 / 0.45);
+}
+
+.about__content {
+  position: relative;
+  display: grid;
+  gap: 2em;
+  max-width: calc(52em + 2 * var(--container-pad));
+  margin-left: 0;
+}
+
+.about__body {
+  display: grid;
+  gap: 1.75em;
+  justify-items: start;
+  max-width: 36em;
+}

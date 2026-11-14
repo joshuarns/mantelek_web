@@ -1,0 +1,130 @@
+.footer {
+  position: relative;
+  padding-top: 6em;
+  border-top: 1px solid var(--theme-line);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2em;
+  row-gap: 5em;
+}
+
+.footer__intro {
+  grid-column: 1 / 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2em;
+}
+
+.footer__logo {
+  width: auto;
+  height: 3.5em;
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  font-weight: 500;
+}
+
+.footer__col--menu {
+  grid-column: 7 / 9;
+}
+.footer__col--rentals {
+  grid-column: 9 / 11;
+}
+.footer__col--social {
+  grid-column: 11 / 13;
+}
+
+.footer__label {
+  margin: 0 0 0.75em;
+  color: var(--cyan);
+}
+
+.footer__link {
+  width: fit-content;
+  opacity: 0.85;
+  transition: opacity 0.3s var(--ease);
+}
+.footer__link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.footer__contact {
+  grid-column: 1 / 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer__phone {
+  transition: color 0.4s var(--ease);
+}
+.footer__phone:hover {
+  color: var(--cyan);
+}
+
+.footer__contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 2em;
+  margin-top: 1.25em;
+  font-weight: 500;
+}
+
+.footer__address {
+  grid-column: 7 / 13;
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: 6em;
+  padding-block: 1.5em;
+  border-top: 1px solid var(--theme-line);
+  font-size: 0.875em;
+  color: var(--theme-muted);
+}
+
+.footer__legal {
+  display: flex;
+  gap: 1.5em;
+}
+
+@media (max-width: 767px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 3em;
+  }
+  .footer__intro,
+  .footer__contact,
+  .footer__address {
+    grid-column: 1 / -1;
+  }
+  .footer__col--menu {
+    grid-column: 1;
+  }
+  .footer__col--rentals {
+    grid-column: 2;
+  }
+  .footer__col--social {
+    grid-column: 1 / -1;
+  }
+  .footer__bottom {
+    flex-direction: column;
+  }
+}

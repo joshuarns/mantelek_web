@@ -1,0 +1,201 @@
+/* ------------------------------------------------------------------
+   Tokens
+   El diseño original está trazado a 1920px y escala todo en `em`:
+   en desktop 1em = 100vw / 120 (16px a 1920px de ancho).
+------------------------------------------------------------------- */
+:root {
+  /* Paleta Mantelek (tomada de mantelek.mx) */
+  --navy: #183f72; /* azul marino de títulos */
+  --blue: #0272be; /* botones principales */
+  --cyan: #00a1cd; /* acento / hover */
+  --yellow: #ffc20e; /* CTA principal (el amarillo de los equipos) */
+  --yellow-hover: #ffd34d;
+  --red: #d7191f; /* CTA "Cotizar" */
+  --red-hover: #ec2a30;
+  --navy-950: #09182d; /* fondo de secciones oscuras (marino profundo) */
+  --navy-900: #112640;
+  --ink: #28303d;
+  --grey: #777777;
+  --slate: #69727d;
+  --light-grey: #b7b7b7;
+  --outline: #dcdcdc;
+  --light: #f7f7f7;
+  --white: #ffffff;
+
+  --ease: cubic-bezier(0.625, 0.05, 0, 1);
+  --container-pad: 4em;
+  --nav-h: 4.5em;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-poppins), Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--ink);
+  background: var(--light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 992px) {
+  body {
+    font-size: calc(100vw / 120);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --container-pad: 1.25em;
+    --nav-h: 4em;
+  }
+}
+
+img,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* ------------------------------------------------------------------
+   Temas por sección (también cambian el color de la nav)
+------------------------------------------------------------------- */
+.theme-dark {
+  --theme-bg: var(--navy-950);
+  --theme-fg: var(--light);
+  --theme-muted: rgb(247 247 247 / 0.6);
+  --theme-line: rgb(247 247 247 / 0.2);
+  background: var(--theme-bg);
+  color: var(--theme-fg);
+}
+
+.theme-light {
+  --theme-bg: var(--light);
+  --theme-fg: var(--navy);
+  --theme-muted: var(--slate);
+  --theme-line: rgb(9 24 45 / 0.15);
+  background: var(--theme-bg);
+  color: var(--theme-fg);
+}
+
+/* ------------------------------------------------------------------
+   Layout
+------------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* ------------------------------------------------------------------
+   Tipografía
+------------------------------------------------------------------- */
+.heading-xxl,
+.heading-xl,
+.heading-l,
+.heading-m,
+.heading-s {
+  margin: 0;
+  font-weight: 600;
+}
+
+.heading-xxl {
+  font-size: 8em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.heading-xl {
+  font-size: 5em;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.heading-l {
+  font-size: 4em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.heading-m {
+  font-size: 3em;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+.heading-s {
+  font-size: 2em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.paragraph-m {
+  margin: 0;
+  font-size: 1.125em;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.paragraph-regular {
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.eyebrow {
+  font-family: var(--font-plex), monospace;
+  font-size: 0.875em;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+  .heading-xxl { font-size: 5.5em; }
+  .heading-xl { font-size: 3.75em; }
+  .heading-l { font-size: 3em; }
+  .heading-m { font-size: 2.5em; }
+}
+
+@media (max-width: 767px) {
+  .heading-xxl { font-size: 3.5em; }
+  .heading-xl { font-size: 2.75em; }
+  .heading-l { font-size: 2.25em; }
+  .heading-m { font-size: 2em; }
+  .paragraph-m { font-size: 1em; }
+}
+
+/* Máscaras de SplitText */
+.split-line {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

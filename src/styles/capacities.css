@@ -1,0 +1,420 @@
+/* ------------------------------------------------------------------
+   Generadores eléctricos industriales
+   Medidas tomadas del diseño a 1600px (1em = 100vw / 120).
+------------------------------------------------------------------- */
+.capacities {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #07090d;
+  color: var(--white);
+}
+
+/* Fondo: planta industrial de noche + sombras + piso claro */
+.capacities__bg-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.capacities__bg {
+  position: absolute;
+  inset: -8% 0;
+  opacity: 0.7;
+}
+
+.capacities__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    /* zona oscura detrás del título */
+    radial-gradient(ellipse 55% 42% at 50% 22%, rgb(5 7 11 / 0.85), transparent 75%),
+    /* viñeta lateral */
+    linear-gradient(to right, rgb(5 7 11 / 0.55), transparent 28%, transparent 72%, rgb(5 7 11 / 0.45)),
+    /* oscurece hacia abajo antes del piso */
+    linear-gradient(to bottom, rgb(5 7 11 / 0.35), rgb(5 7 11 / 0.15) 40%, rgb(5 7 11 / 0.7) 72%);
+}
+
+.capacities__floor {
+  position: absolute;
+  inset: auto 0 0;
+  height: 25%;
+  background:
+    radial-gradient(ellipse 45% 70% at 34% 35%, rgb(255 255 255 / 0.55), transparent 70%),
+    linear-gradient(to bottom, rgb(200 203 208 / 0) 0%, #c9ccd1 16%, #e3e4e7 50%, #f2f2f3 100%);
+}
+
+.capacities__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  padding-top: calc(var(--nav-h) + 3em);
+}
+
+/* ------------------------------------------------------------------
+   Encabezado y pestañas
+------------------------------------------------------------------- */
+.capacities__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.capacities__title {
+  margin: 0;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-shadow: 0 0.1em 0.6em rgb(0 0 0 / 0.45);
+}
+
+.capacities__title-line {
+  display: block;
+  font-size: 4.4em;
+}
+
+.capacities__title-line + .capacities__title-line {
+  font-size: 5.5em;
+}
+
+.capacities__subtitle {
+  margin: 0.9em 0 0;
+  font-size: 1.9em;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.capacities__tabs {
+  position: relative;
+  display: inline-flex;
+  margin-top: 1.75em;
+  padding: 0.3em;
+  border: 1.5px solid rgb(255 255 255 / 0.55);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.capacities__tab-pill {
+  position: absolute;
+  top: 0.3em;
+  bottom: 0.3em;
+  left: 0;
+  width: 0;
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: 0 0.25em 1em rgb(0 0 0 / 0.25);
+}
+
+.capacities__tab {
+  position: relative;
+  padding: 0.7em 2.1em;
+  border: 0;
+  background: none;
+  color: var(--white);
+  font: inherit;
+  font-size: 1.35em;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.5s var(--ease);
+}
+
+.capacities__tab + .capacities__tab::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1.1em;
+  border-left: 1px solid rgb(255 255 255 / 0.45);
+  transform: translateY(-50%);
+  transition: opacity 0.4s;
+}
+
+/* Sin separador junto a la pestaña activa. */
+.capacities__tab.is-active::before,
+.capacities__tab.is-active + .capacities__tab::before {
+  opacity: 0;
+}
+
+.capacities__tab.is-active {
+  color: #12161d;
+}
+
+/* Mientras la píldora animada no tiene posición, la pestaña activa lleva su propio fondo. */
+.capacities__tabs:not(.is-ready) .capacities__tab.is-active {
+  border-radius: 999px;
+  background: var(--white);
+}
+
+.capacities__tab:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+/* ------------------------------------------------------------------
+   Escenario + información
+------------------------------------------------------------------- */
+.capacities__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  align-items: end;
+  column-gap: 3em;
+  padding-bottom: 2em;
+}
+
+.capacities__stage {
+  position: relative;
+  height: 34em;
+  perspective: 1400px;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.capacities__stage:active {
+  cursor: grabbing;
+}
+
+.capacities__turntable {
+  position: absolute;
+  inset: 0 0 4.5em;
+  transform-style: preserve-3d;
+}
+
+.capacities__product {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Antes de que corra el JS (es el hero: se ve en el primer cuadro) solo se
+   muestra el primer equipo; después GSAP controla la visibilidad. */
+.capacities__product:not(:first-child) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.capacities__product-img {
+  position: relative;
+  width: calc(var(--scale, 1) * 100%);
+  max-height: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 1em 1.25em rgb(0 0 0 / 0.3));
+  pointer-events: none;
+}
+
+.capacities__product-shadow {
+  position: absolute;
+  bottom: -1.5em;
+  left: 50%;
+  width: calc(var(--scale, 1) * 90%);
+  height: 3.5em;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.45), transparent);
+}
+
+/* Anillo "360°" sobre el piso */
+.capacities__ring {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 0;
+  height: 9em;
+  border: 1.5px solid rgb(40 44 52 / 0.45);
+  border-radius: 50%;
+}
+
+.capacities__ring-label {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  padding: 0 0.6em;
+  transform: translate(-50%, 50%);
+  background: #eeeff0;
+  color: #3b3f46;
+  font-size: 1.9em;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.capacities__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6em;
+  padding-bottom: 4em;
+}
+
+.capacities__heading {
+  margin: 0;
+  font-size: 2.9em;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.capacities__text {
+  margin: 0;
+  font-size: 1.45em;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.88);
+}
+
+.capacities__pill {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: #12161d;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.capacities__features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  margin: 0.4em 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.capacities__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+  padding-inline: 0.6em;
+  font-size: 1.1em;
+  line-height: 1.3;
+  text-align: center;
+  color: rgb(255 255 255 / 0.9);
+}
+
+.capacities__feature + .capacities__feature {
+  border-left: 1px solid rgb(255 255 255 / 0.25);
+}
+
+.capacities__feature-icon {
+  width: 2.4em;
+  height: 2.4em;
+  color: var(--white);
+}
+
+.capacities__info .btn--red {
+  font-size: 1.3em;
+}
+
+/* ------------------------------------------------------------------
+   Tablet y móvil: el texto va antes del escenario para que el
+   equipo quede sobre el piso claro, al final de la sección.
+------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .capacities__inner {
+    padding-top: calc(var(--nav-h) + 3em);
+  }
+  .capacities__title-line {
+    font-size: 2.75em;
+  }
+  .capacities__title-line + .capacities__title-line {
+    font-size: 3.5em;
+  }
+  .capacities__subtitle {
+    font-size: 1em;
+    letter-spacing: 0.24em;
+  }
+  /* Las pestañas se desplazan en horizontal si no caben. */
+  .capacities__tabs {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .capacities__tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .capacities__tab {
+    padding: 0.65em 1.25em;
+    font-size: 0.9375em;
+  }
+  .capacities__body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2em;
+    margin-top: 2.5em;
+    padding-bottom: 1.5em;
+  }
+  .capacities__info {
+    padding-bottom: 0;
+  }
+  .capacities__heading {
+    font-size: 2em;
+  }
+  .capacities__text {
+    font-size: 1em;
+  }
+  .capacities__feature {
+    font-size: 0.875em;
+  }
+  .capacities__info .btn--red {
+    font-size: 0.9375em;
+  }
+  .capacities__stage {
+    height: min(62vw, 26em);
+    margin-bottom: 1em;
+  }
+  /* El piso va pegado al escenario: una franja clara que se funde con el fondo. */
+  .capacities__stage::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--container-pad));
+    right: calc(-1 * var(--container-pad));
+    bottom: -2.5em;
+    height: 70%;
+    background: linear-gradient(to bottom, rgb(201 204 209 / 0) 0%, #cfd2d6 30%, #eceef0 62%, rgb(7 9 13 / 0) 100%);
+  }
+  .capacities__turntable {
+    bottom: 3.5em;
+  }
+  .capacities__ring {
+    height: 6em;
+  }
+  .capacities__ring-label {
+    font-size: 1.25em;
+  }
+  .capacities__floor {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .capacities__title-line {
+    font-size: 2em;
+  }
+  .capacities__title-line + .capacities__title-line {
+    font-size: 2.6em;
+  }
+  .capacities__subtitle {
+    font-size: 0.75em;
+  }
+  .capacities__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.25em;
+  }
+  .capacities__feature:nth-child(3) {
+    border-left: 0;
+  }
+}
