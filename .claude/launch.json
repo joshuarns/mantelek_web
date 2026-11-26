@@ -4,14 +4,35 @@
     {
       "name": "dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000
     },
     {
       "name": "dev-webpack",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "dev", "--webpack", "-p", "3001"],
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "--webpack",
+        "-p",
+        "3001"
+      ],
       "port": 3001
+    },
+    {
+      "name": "cpanel-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3002",
+        "--directory",
+        "out"
+      ],
+      "port": 3002
     }
   ]
 }

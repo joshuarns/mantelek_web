@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cpanel": "next build --webpack && rm -f mantelek-cpanel.zip && cd out && zip -qrX ../mantelek-cpanel.zip . -x \"*.DS_Store\""
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

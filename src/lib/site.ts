@@ -1,14 +1,16 @@
 /**
- * URL pública del sitio (para metadatos, sitemap y robots).
- * - `NEXT_PUBLIC_SITE_URL` si se define (p. ej. el dominio propio).
+ * URL pública del sitio (para metadatos, sitemap y robots). Como el sitio es
+ * estático, queda fija en el HTML al compilar:
+ * - `NEXT_PUBLIC_SITE_URL` si se define al compilar (otro dominio o un subdominio de prueba).
  * - En Vercel, el dominio de producción del proyecto (variable de sistema).
- * - En local, localhost.
+ * - Si no, el dominio de Mantelek.
  */
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+    : "https://mantelek.mx")
+).replace(/\/$/, "");
 
 export const siteName = "Mantelek Power Rentals";
 export const siteTitle = "Venta y Renta de Plantas de Luz | Generadores Eléctricos - Mantelek";
